@@ -8,7 +8,8 @@ module.exports = {
     {
       resolve: `gatsby-source-wordpress`,
       options: {
-        url: `http://localhost/Testingsite/graphql`,
+      //  url: `http://localhost/Testingsite/graphql`,
+        url: `https://botryose-hyperkeratotic-emelia.ngrok-free.dev/Testingsite/graphql`,
         schema: {
           timeout: 60000, // 60s
           perPage: 20,    // fetch data in smaller chunks
