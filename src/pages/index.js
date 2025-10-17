@@ -1,3 +1,4 @@
+/*
 import * as React from "react"
 
 const pageStyles = {
@@ -174,3 +175,38 @@ const IndexPage = () => {
 export default IndexPage
 
 export const Head = () => <title>Home Page</title>
+*/
+import * as React from "react"
+import { graphql } from "gatsby"
+import Layout from "../components/layout"
+
+const IndexPage = ({ data }) => {
+  const posts = data.allWpPost.nodes
+
+  return (
+    <Layout>
+      <h1>Latest WordPress Posts</h1>
+      {posts.map(post => (
+        <article key={post.id}>
+          <h2>{post.title}</h2>
+          <div dangerouslySetInnerHTML={{ __html: post.excerpt }} />
+        </article>
+      ))}
+    </Layout>
+  )
+}
+
+export const query = graphql`
+  query {
+    allWpPost(sort: { date: DESC }) {
+      nodes {
+        id
+        title
+        excerpt
+        slug
+      }
+    }
+  }
+`
+
+export default IndexPage
