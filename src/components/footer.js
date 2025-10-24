@@ -43,7 +43,7 @@ const Footer = () => {
           {menuItems.map((item) => (
             <Link
               key={item.id}
-              to={item.url.replace("http://localhost/Testingsite", "")}
+              to={item.url.replace("https://botryose-hyperkeratotic-emelia.ngrok-free.dev/Testingsite/", "")}
               style={{ margin: "0 0.5rem", textDecoration: "none", color: "#333" }}
             >
               {item.label}
