@@ -1,53 +1,86 @@
-/*import React from "react"
-import { Link, useStaticQuery, graphql } from "gatsby"
+import React from "react"
+import { useStaticQuery, graphql, Link } from "gatsby"
 
 const Header = () => {
   const data = useStaticQuery(graphql`
-    query {
+    query SafeHeaderQuery {
       wp {
         generalSettings {
           title
+          description
         }
-        menus {
+        # These may not always exist — WPGraphQL Menus/ThemeMod plugins are optional
+        menus(where: { location: PRIMARY }) {
           nodes {
-            name
             menuItems {
               nodes {
+                id
                 label
                 url
               }
             }
           }
         }
+        themeModSettings {
+          customLogo {
+            sourceUrl
+          }
+        }
       }
     }
   `)
 
-  const menu = data.wp.menus.nodes[0] // First menu (e.g., "Primary")
-  const title = data.wp.generalSettings.title
+  const title = data.wp?.generalSettings?.title || "My Gatsby + WordPress Site"
+  const tagline = data.wp?.generalSettings?.description || ""
+  const logoUrl = data.wp?.themeModSettings?.customLogo?.sourceUrl || null
+  const menuItems = data.wp?.menus?.nodes?.[0]?.menuItems?.nodes || []
 
   return (
-    <header style={{ background: "#eee", padding: "1rem" }}>
-      <h2>{title}</h2>
-      {menu && (
-        <nav>
-          {menu.menuItems.nodes.map(item => (
+    <header
+      style={{
+        padding: "1rem 2rem",
+        background: "#f7f7f7",
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        borderBottom: "1px solid #ddd",
+      }}
+    >
+      <div style={{ display: "flex", alignItems: "center" }}>
+        {logoUrl && (
+          <img
+            src={logoUrl}
+            alt="Site Logo"
+            style={{ height: "50px", marginRight: "1rem" }}
+          />
+        )}
+        <div>
+          <h1 style={{ margin: 0, fontSize: "1.5rem" }}>{title}</h1>
+          {tagline && <p style={{ margin: 0, color: "#666" }}>{tagline}</p>}
+        </div>
+      </div>
+
+      <nav>
+        {menuItems.length > 0 ? (
+          menuItems.map((item) => (
             <Link
-              key={item.url}
-              to={item.url.replace(data.wp.generalSettings.url, "")}
-              style={{ marginRight: "1rem" }}
+              key={item.id}
+              to={item.url.replace("https://botryose-hyperkeratotic-emelia.ngrok-free.dev/Testingsite/", "")}
+              style={{ marginLeft: "1rem", textDecoration: "none", color: "#333" }}
             >
               {item.label}
             </Link>
-          ))}
-        </nav>
-      )}
+          ))
+        ) : (
+          <span style={{ color: "#aaa" }}>No menu found</span>
+        )}
+      </nav>
     </header>
   )
 }
 
 export default Header
-*/
+/*
 // src/components/header.js
 import React from "react"
 
@@ -60,3 +93,4 @@ const Header = () => {
 }
 
 export default Header
+*/
