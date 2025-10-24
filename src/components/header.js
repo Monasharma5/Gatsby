@@ -1,18 +1,24 @@
-/*import React from "react"
-import { Link, useStaticQuery, graphql } from "gatsby"
+import React from "react"
+import { useStaticQuery, graphql, Link } from "gatsby"
 
 const Header = () => {
   const data = useStaticQuery(graphql`
-    query {
+    query HeaderQuery {
       wp {
         generalSettings {
           title
+          description
         }
-        menus {
+        themeModSettings {
+          customLogo {
+            sourceUrl
+          }
+        }
+        menus(where: { location: PRIMARY }) {
           nodes {
-            name
             menuItems {
               nodes {
+                id
                 label
                 url
               }
@@ -23,31 +29,45 @@ const Header = () => {
     }
   `)
 
-  const menu = data.wp.menus.nodes[0] // First menu (e.g., "Primary")
-  const title = data.wp.generalSettings.title
+  const menuItems = data.wp.menus.nodes[0]?.menuItems.nodes || []
+  const logoUrl = data.wp.themeModSettings?.customLogo?.sourceUrl
 
   return (
-    <header style={{ background: "#eee", padding: "1rem" }}>
-      <h2>{title}</h2>
-      {menu && (
-        <nav>
-          {menu.menuItems.nodes.map(item => (
-            <Link
-              key={item.url}
-              to={item.url.replace(data.wp.generalSettings.url, "")}
-              style={{ marginRight: "1rem" }}
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
-      )}
+    <header
+      style={{
+        padding: "1rem 2rem",
+        background: "#f4f4f4",
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+      }}
+    >
+      <div style={{ display: "flex", alignItems: "center" }}>
+        {logoUrl ? (
+          <img src={logoUrl} alt="Site logo" style={{ height: "50px", marginRight: "1rem" }} />
+        ) : null}
+        <div>
+          <h1 style={{ margin: 0 }}>{data.wp.generalSettings.title}</h1>
+          <p style={{ margin: 0 }}>{data.wp.generalSettings.description}</p>
+        </div>
+      </div>
+      <nav>
+        {menuItems.map(item => (
+          <Link
+            key={item.id}
+            to={item.url.replace("http://localhost/Testingsite", "")}
+            style={{ marginLeft: "1rem" }}
+          >
+            {item.label}
+          </Link>
+        ))}
+      </nav>
     </header>
   )
 }
 
 export default Header
-*/
+/*
 // src/components/header.js
 import React from "react"
 
@@ -60,3 +80,4 @@ const Header = () => {
 }
 
 export default Header
+*/
