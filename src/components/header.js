@@ -1,4 +1,4 @@
-import React from "react"
+/*import React from "react"
 import { useStaticQuery, graphql, Link } from "gatsby"
 
 const Header = () => {
@@ -94,3 +94,30 @@ const Header = () => {
 
 export default Header
 */
+// src/components/Header.js
+import React from "react"
+import { Link } from "gatsby"
+
+const Header = () => {
+  return (
+    <header className="flex items-center justify-between px-8 py-4 border-b border-gray-200">
+      {/* Site Logo / Title */}
+      <div className="text-2xl font-bold text-gray-800">
+        <Link to="/">DTtesting</Link>
+      </div>
+
+      {/* Navigation Menu */}
+      <nav>
+        <ul className="flex space-x-6 text-gray-700">
+          <li><Link to="/about">About</Link></li>
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/privacy-policy">Privacy Policy</Link></li>
+          <li><Link to="/sample-page">Sample Page</Link></li>
+        </ul>
+      </nav>
+    </header>
+  )
+}
+
+export default Header
+
