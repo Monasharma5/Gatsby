@@ -27,6 +27,7 @@ const Header = () => {
 
 export default Header
 */
+/*
 import React from "react"
 import { Link } from "gatsby"
 
@@ -34,7 +35,6 @@ const Header = () => {
   return (
     <header className="w-full bg-white shadow-sm border-b border-gray-200">
       <div className="max-w-7xl mx-auto flex items-center justify-between py-4 px-8">
-        {/* Logo / Site Title */}
         <div className="text-2xl font-semibold text-gray-900 tracking-tight">
           <Link
             to="/"
@@ -44,7 +44,6 @@ const Header = () => {
           </Link>
         </div>
 
-        {/* Navigation */}
         <nav className="flex items-center space-x-10">
           <Link
             to="/"
@@ -74,6 +73,30 @@ const Header = () => {
           >
             Sample Page
           </Link>
+        </nav>
+      </div>
+    </header>
+  )
+}
+
+export default Header
+*/
+import React from "react"
+import { Link } from "gatsby"
+import "../styles/header.css"
+
+const Header = () => {
+  return (
+    <header>
+      <div className="header-container">
+        <div className="logo"><Link to="/">DTtesting</Link></div>
+        <nav>
+          <ul>
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/about">About</Link></li>
+            <li><Link to="/privacy-policy">Privacy Policy</Link></li>
+            <li><Link to="/sample-page">Sample Page</Link></li>
+          </ul>
         </nav>
       </div>
     </header>
