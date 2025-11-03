@@ -95,18 +95,20 @@ const Header = () => {
 export default Header
 */
 // src/components/Header.js
+
+/*
 import React from "react"
 import { Link } from "gatsby"
 
 const Header = () => {
   return (
     <header className="flex items-center justify-between px-8 py-4 border-b border-gray-200">
-      {/* Site Logo / Title */}
+      {}
       <div className="text-2xl font-bold text-gray-800">
         <Link to="/">DTtesting</Link>
       </div>
 
-      {/* Navigation Menu */}
+      {}
       <nav>
         <ul className="flex space-x-6 text-gray-700">
           <li><Link to="/about">About</Link></li>
@@ -120,4 +122,51 @@ const Header = () => {
 }
 
 export default Header
+*/
+import React, { useState } from "react"
+import { Link } from "gatsby"
 
+const Header = () => {
+  const [menuOpen, setMenuOpen] = useState(false)
+
+  return (
+    <header className="flex items-center justify-between px-6 py-4 border-b border-gray-200">
+      {/* Logo */}
+      <div className="text-2xl font-bold text-gray-800">
+        <Link to="/">DTtesting</Link>
+      </div>
+
+      {/* Desktop Nav */}
+      <nav className="hidden md:block">
+        <ul className="flex space-x-6 text-gray-700">
+          <li><Link to="/about">About</Link></li>
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/privacy-policy">Privacy Policy</Link></li>
+          <li><Link to="/sample-page">Sample Page</Link></li>
+        </ul>
+      </nav>
+
+      {/* Mobile Menu Button */}
+      <button
+        className="md:hidden text-gray-700"
+        onClick={() => setMenuOpen(!menuOpen)}
+      >
+        ☰
+      </button>
+
+      {/* Mobile Nav */}
+      {menuOpen && (
+        <nav className="absolute top-16 right-6 bg-white shadow-lg rounded-md md:hidden">
+          <ul className="flex flex-col items-start p-4 space-y-3 text-gray-700">
+            <li><Link to="/about">About</Link></li>
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/privacy-policy">Privacy Policy</Link></li>
+            <li><Link to="/sample-page">Sample Page</Link></li>
+          </ul>
+        </nav>
+      )}
+    </header>
+  )
+}
+
+export default Header

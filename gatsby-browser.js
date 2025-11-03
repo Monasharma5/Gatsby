@@ -1,1 +1,0 @@
-import "http://localhost/Testingsite/wp-content/themes/twentytwentyfive/style.css"
